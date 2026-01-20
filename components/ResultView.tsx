@@ -177,14 +177,14 @@ export const ResultView: React.FC<ResultViewProps> = ({
             
             return (
               <details key={ans.questionId} className="group rounded-2xl border border-gray-200 bg-white overflow-hidden open:shadow-md transition-all duration-300">
-                <summary className="flex items-center justify-between p-5 cursor-pointer select-none hover:bg-gray-50 transition-colors">
-                  <div className="flex items-center gap-4">
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-sm ${ans.isCorrect ? 'bg-brand text-white' : 'bg-red-500 text-white'}`}>
+                <summary className="flex items-start md:items-center justify-between p-4 md:p-5 cursor-pointer select-none hover:bg-gray-50 transition-colors gap-3">
+                  <div className="flex items-start md:items-center gap-3 md:gap-4 flex-1">
+                    <div className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center text-sm md:text-base font-bold shadow-sm shrink-0 mt-0.5 md:mt-0 ${ans.isCorrect ? 'bg-brand text-white' : 'bg-red-500 text-white'}`}>
                       {ans.isCorrect ? '✓' : '✕'}
                     </div>
-                    <span className="font-medium text-gray-800 text-base pr-4">{question.question}</span>
+                    <span className="font-medium text-gray-800 text-sm md:text-base leading-snug">{question.question}</span>
                   </div>
-                  <ChevronDown className="w-5 h-5 text-muted transition-transform group-open:rotate-180 shrink-0" />
+                  <ChevronDown className="w-5 h-5 text-muted transition-transform group-open:rotate-180 shrink-0 mt-1 md:mt-0 ml-2" />
                 </summary>
                 <div className="p-5 pt-0 text-sm text-gray-600 border-t border-gray-100 mt-2">
                   <div className="grid gap-3 mt-4">
