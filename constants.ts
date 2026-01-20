@@ -1,232 +1,214 @@
 import { QuestionData } from './types';
 
-export const QUESTION_BANK: QuestionData[] = [
-  // --- Fevereiro Roxo (Lúpus, Fibromialgia, Alzheimer) ---
-  {
-    id: "r1",
-    category: "roxo",
-    question: "O Fevereiro Roxo chama atenção principalmente para quais condições?",
-    options: [
-      "Lúpus, Fibromialgia e Alzheimer",
-      "Hipertensão, Diabetes e Asma",
-      "Câncer de pele e melanoma",
-      "Dengue, Zika e Chikungunya"
-    ],
-    answerIndex: 0,
-    explanation:
-      "A campanha Fevereiro Roxo é associada à conscientização sobre Lúpus, Fibromialgia e Alzheimer, reforçando a importância do diagnóstico e acompanhamento."
-  },
-  {
-    id: "r2",
-    category: "roxo",
-    question: "Qual frase é frequentemente usada na campanha Fevereiro Roxo?",
-    options: [
-      "Se não houver cura, que haja conforto",
-      "A vida começa aos 40",
-      "Corra 10km por dia",
-      "Menos sal, mais vida"
-    ],
-    answerIndex: 0,
-    explanation:
-      "A mensagem busca acolhimento e qualidade de vida, valorizando tratamento, apoio e bem-estar mesmo quando não há cura definitiva."
-  },
-  {
-    id: "r3",
-    category: "roxo",
-    question: "Sobre Lúpus, qual afirmação é mais adequada?",
-    options: [
-      "É uma doença autoimune que pode afetar diversos órgãos",
-      "É uma infecção bacteriana sempre contagiosa",
-      "Só atinge crianças e desaparece espontaneamente",
-      "É causada exclusivamente por falta de vitaminas"
-    ],
-    answerIndex: 0,
-    explanation:
-      "Lúpus é autoimune e pode variar muito de pessoa para pessoa, exigindo acompanhamento especializado."
-  },
-  {
-    id: "r4",
-    category: "roxo",
-    question: "Na Fibromialgia, é comum observar:",
-    options: [
-      "Dor crônica difusa e fadiga, com impacto no sono",
-      "Febre alta contínua e lesões cutâneas contagiosas",
-      "Perda súbita de visão em poucas horas em todos os casos",
-      "Cura imediata apenas com antibiótico"
-    ],
-    answerIndex: 0,
-    explanation:
-      "Fibromialgia costuma envolver dor crônica, fadiga e alterações do sono; abordagem multidisciplinar ajuda muito."
-  },
-  {
-    id: "r5",
-    category: "roxo",
-    question: "Um sinal que pode estar associado a alterações cognitivas (ex.: Alzheimer) é:",
-    options: [
-      "Esquecer compromissos com frequência e ter dificuldade com tarefas habituais",
-      "Aumentar força muscular rapidamente",
-      "Ter dor de garganta por 2 dias",
-      "Ter alergia sazonal em toda primavera"
-    ],
-    answerIndex: 0,
-    explanation:
-      "Mudanças persistentes de memória e funcionalidade merecem avaliação profissional, especialmente se interferirem na rotina."
-  },
-  {
-    id: "r6",
-    category: "roxo",
-    question: "Qual atitude é mais alinhada à conscientização do Fevereiro Roxo?",
-    options: [
-      "Buscar informação confiável e incentivar acompanhamento médico",
-      "Automedicar-se e ignorar sintomas persistentes",
-      "Evitar falar sobre saúde para não “dar azar”",
-      "Abandonar tratamentos ao primeiro sinal de melhora"
-    ],
-    answerIndex: 0,
-    explanation:
-      "Conscientização envolve informação, acolhimento e adesão ao cuidado, com avaliação profissional quando necessário."
-  },
-  {
-    id: "r7",
-    category: "roxo",
-    question: "Qual destes fatores ambientais é conhecido por poder agravar o Lúpus?",
-    options: [
-      "Exposição excessiva ao sol (radiação ultravioleta)",
-      "Beber muita água mineral",
-      "Uso de roupas de algodão",
-      "Ouvir música alta"
-    ],
-    answerIndex: 0,
-    explanation:
-      "A fotossensibilidade é muito comum no Lúpus; a proteção solar é parte fundamental do cuidado."
-  },
-  {
-    id: "r8",
-    category: "roxo",
-    question: "Em relação ao Alzheimer, hábitos de vida saudáveis:",
-    options: [
-      "Podem ajudar na prevenção e na qualidade de vida",
-      "Não têm nenhuma influência sobre o cérebro",
-      "Só funcionam se iniciados após os 80 anos",
-      "Causam perda de memória imediata"
-    ],
-    answerIndex: 0,
-    explanation:
-      "Exercícios físicos, alimentação balanceada e estímulo cognitivo são fatores protetores importantes para a saúde cerebral."
-  },
+// Perguntas (15) — 5 fáceis, 8 médias, 2 difíceis
+// categories: "roxo" (Lúpus/Fibromialgia/Alzheimer) | "laranja" (Leucemia)
 
-  // --- Fevereiro Laranja (Leucemia) ---
+export const QUESTION_BANK: QuestionData[] = [
+  // =========================
+  // FÁCEIS (5)
+  // =========================
   {
-    id: "l1",
+    id: "F1",
+    category: "roxo",
+    question: "O Lúpus é, em geral, uma doença:",
+    options: [
+      "Autoimune (o corpo reage contra si mesmo)",
+      "Sempre causada por bactéria contagiosa",
+      "Que só afeta a pele",
+      "Que só ocorre em idosos"
+    ],
+    answerIndex: 0,
+    explanation: "Lúpus é uma doença autoimune e pode atingir diferentes órgãos e tecidos."
+  },
+  {
+    id: "F2",
+    category: "roxo",
+    question: "Na fibromialgia, um sintoma muito comum é:",
+    options: [
+      "Dor crônica difusa pelo corpo",
+      "Febre alta contínua",
+      "Coceira contagiosa na pele",
+      "Perda total de audição repentina"
+    ],
+    answerIndex: 0,
+    explanation: "Fibromialgia costuma envolver dor crônica generalizada, além de fadiga e alterações do sono."
+  },
+  {
+    id: "F3",
+    category: "roxo",
+    question: "Um sinal que pode estar relacionado ao Alzheimer é:",
+    options: [
+      "Esquecimentos frequentes que atrapalham a rotina",
+      "Aumento rápido de força muscular",
+      "Melhora da memória sem explicação",
+      "Dor no dedo após uma pancada"
+    ],
+    answerIndex: 0,
+    explanation: "No Alzheimer, alterações de memória e outras funções cognitivas podem interferir nas atividades do dia a dia."
+  },
+  {
+    id: "F4",
     category: "laranja",
-    question: "O Fevereiro Laranja é voltado principalmente para a conscientização sobre:",
+    question: "O Fevereiro Laranja chama atenção principalmente para:",
     options: [
       "Leucemia",
-      "Miopia",
-      "Gastrite",
-      "Otite"
+      "Hipertensão",
+      "Câncer de pele",
+      "Depressão"
     ],
     answerIndex: 0,
-    explanation:
-      "A campanha Fevereiro Laranja reforça a conscientização sobre leucemia e também costuma incentivar a doação de medula óssea."
+    explanation: "Fevereiro Laranja é conhecido pela conscientização sobre leucemia e incentivo à doação de medula óssea."
   },
   {
-    id: "l2",
+    id: "F5",
     category: "laranja",
-    question: "A leucemia é, em termos gerais, um câncer que afeta principalmente:",
+    question: "A leucemia afeta principalmente:",
     options: [
-      "O sangue e a medula óssea",
-      "A pele",
-      "A córnea",
-      "A cartilagem do joelho"
+      "Sangue e medula óssea",
+      "Fígado e vesícula",
+      "Pulmão e pleura",
+      "Rins e bexiga"
     ],
     answerIndex: 0,
-    explanation:
-      "Leucemias envolvem alterações na produção de células sanguíneas, com origem frequentemente na medula óssea."
+    explanation: "Leucemias envolvem alterações nas células do sangue, frequentemente com origem na medula óssea."
   },
+
+  // =========================
+  // MÉDIAS (8)
+  // =========================
   {
-    id: "l3",
-    category: "laranja",
-    question: "Qual conjunto de sinais pode justificar procurar avaliação médica, especialmente se persistirem?",
+    id: "M1",
+    category: "roxo",
+    question: "Uma conduta importante para quem tem suspeita de Lúpus é:",
     options: [
-      "Cansaço intenso, palidez, infecções frequentes e hematomas fáceis",
-      "Unhas crescendo rápido e aumento de apetite por 1 dia",
-      "Coceira após usar um sabonete novo e melhora em horas",
-      "Dor muscular após exercício intenso e melhora em 48h"
-    ],
-    answerIndex: 0,
-    explanation:
-      "Sinais como fadiga, palidez, infecções recorrentes e sangramentos/hematomas fáceis podem indicar alteração hematológica e precisam de avaliação."
-  },
-  {
-    id: "l4",
-    category: "laranja",
-    question: "Sobre doação de medula óssea, qual afirmação é correta em geral?",
-    options: [
-      "Exige compatibilidade e cadastro; pode salvar vidas",
-      "É sempre feita sem exames e sem consentimento",
-      "Dispensa avaliação médica e não tem critérios",
-      "Não tem relação com tratamento de doenças hematológicas"
-    ],
-    answerIndex: 0,
-    explanation:
-      "A doação envolve cadastro e critérios; quando há compatibilidade, pode ser decisiva para tratamento de várias doenças do sangue."
-  },
-  {
-    id: "l5",
-    category: "laranja",
-    question: "Qual atitude ajuda mais na campanha Fevereiro Laranja?",
-    options: [
-      "Divulgar informação confiável e incentivar doação e diagnóstico precoce",
-      "Espalhar “curas” sem base científica",
-      "Desencorajar exames por medo de resultados",
-      "Tratar sintomas persistentes apenas com chás por meses"
-    ],
-    answerIndex: 0,
-    explanation:
-      "A campanha foca em conscientização, sinais de alerta, busca por cuidado e incentivo responsável à doação de medula."
-  },
-  {
-    id: "l6",
-    category: "laranja",
-    question: "Se alguém apresenta sintomas persistentes e preocupantes, o melhor próximo passo é:",
-    options: [
-      "Procurar um serviço de saúde para avaliação e exames adequados",
-      "Esperar mais 6 meses para ver se passa",
+      "Procurar avaliação médica e acompanhamento regular",
       "Tomar antibiótico por conta própria",
-      "Ignorar, pois “é só estresse”"
+      "Evitar qualquer consulta para não se preocupar",
+      "Interromper remédios ao melhorar por 1 dia"
     ],
     answerIndex: 0,
-    explanation:
-      "Persistência e piora de sintomas justificam avaliação profissional. Diagnóstico precoce pode mudar o desfecho."
+    explanation: "O diagnóstico e o controle do lúpus exigem avaliação e seguimento, pois os sintomas podem variar."
   },
   {
-    id: "l7",
-    category: "laranja",
-    question: "A Leucemia pode acometer:",
+    id: "M2",
+    category: "roxo",
+    question: "Na fibromialgia, qual abordagem tende a ajudar mais?",
     options: [
-      "Pessoas de qualquer idade, incluindo crianças e idosos",
-      "Apenas recém-nascidos",
-      "Apenas pessoas acima de 90 anos",
-      "Apenas quem trabalha com tintas"
+      "Tratamento multidisciplinar (ex.: atividade física orientada, sono, suporte)",
+      "Apenas repouso absoluto por meses",
+      "Somente antibiótico",
+      "Ignorar sintomas para “passar sozinho”"
     ],
     answerIndex: 0,
-    explanation:
-      "Existem diferentes tipos de leucemia (agudas e crônicas) que podem afetar diferentes faixas etárias, do público infantil ao idoso."
+    explanation: "A fibromialgia costuma responder melhor a um conjunto de medidas, incluindo hábitos e acompanhamento."
   },
   {
-    id: "l8",
-    category: "laranja",
-    question: "O diagnóstico precoce da Leucemia:",
+    id: "M3",
+    category: "roxo",
+    question: "Sobre Alzheimer, é correto dizer que:",
     options: [
-      "Aumenta significativamente as chances de sucesso no tratamento",
-      "Não faz diferença alguma no resultado",
-      "Torna o tratamento impossível",
-      "Só é possível após 10 anos de doença"
+      "É uma condição neurodegenerativa que pode evoluir com o tempo",
+      "É sempre reversível em poucos dias",
+      "Acontece apenas por falta de vontade",
+      "Não impacta a vida diária"
     ],
     answerIndex: 0,
-    explanation:
-      "Quanto mais cedo a doença for identificada, mais rápido o tratamento pode ser iniciado, melhorando o prognóstico."
+    explanation: "Alzheimer é uma condição neurodegenerativa; intervenções e apoio podem ajudar na qualidade de vida."
+  },
+  {
+    id: "M4",
+    category: "laranja",
+    question: "Um conjunto de sinais que pode ocorrer na leucemia e merece avaliação se persistir é:",
+    options: [
+      "Cansaço, palidez, infecções frequentes e hematomas fáceis",
+      "Espirros ao acordar e coceira leve por 1 dia",
+      "Dor muscular após treino e melhora rápida",
+      "Sede após comer salgado e melhora ao beber água"
+    ],
+    answerIndex: 0,
+    explanation: "Alterações hematológicas podem levar a fadiga, palidez, infecções e sangramentos/hematomas com mais facilidade."
+  },
+  {
+    id: "M5",
+    category: "roxo",
+    question: "No Lúpus, qual afirmação faz mais sentido?",
+    options: [
+      "Pode haver períodos de melhora e piora (fases)",
+      "Os sintomas são sempre iguais para todo mundo",
+      "Só existe um tipo de Lúpus, com a mesma gravidade",
+      "Nunca precisa de acompanhamento"
+    ],
+    answerIndex: 0,
+    explanation: "Lúpus pode variar ao longo do tempo e entre pessoas, com fases de atividade e controle."
+  },
+  {
+    id: "M6",
+    category: "roxo",
+    question: "Em campanhas de conscientização, o mais responsável é:",
+    options: [
+      "Divulgar informação confiável e incentivar buscar ajuda profissional quando necessário",
+      "Prometer “cura” rápida sem base científica",
+      "Desencorajar exames para evitar preocupação",
+      "Substituir tratamento por “receitas milagrosas”"
+    ],
+    answerIndex: 0,
+    explanation: "Conscientização envolve informação de qualidade, acolhimento e orientação para avaliação adequada."
+  },
+  {
+    id: "M7",
+    category: "laranja",
+    question: "Sobre doação de medula óssea, em geral:",
+    options: [
+      "É necessário cadastro e compatibilidade; pode salvar vidas",
+      "Qualquer pessoa doa sem critérios e sem consentimento",
+      "Não tem relação com doenças do sangue",
+      "É proibida em todos os casos"
+    ],
+    answerIndex: 0,
+    explanation: "A doação depende de cadastro e compatibilidade. Quando possível, pode ser decisiva para tratamento."
+  },
+  {
+    id: "M8",
+    category: "roxo",
+    question: "Qual situação sugere buscar avaliação por possível alteração cognitiva?",
+    options: [
+      "Mudanças de memória e orientação que atrapalham tarefas do dia a dia",
+      "Esquecer onde colocou a chave uma vez no mês",
+      "Esquecer um nome e lembrar depois",
+      "Sono ruim após uma noite de festa"
+    ],
+    answerIndex: 0,
+    explanation: "Quando mudanças são persistentes e interferem na rotina, vale procurar avaliação profissional."
+  },
+
+  // =========================
+  // DIFÍCEIS (2)
+  // =========================
+  {
+    id: "D1",
+    category: "roxo",
+    question: "Qual afirmação diferencia melhor Fibromialgia de processos inflamatórios clássicos?",
+    options: [
+      "Pode haver dor intensa mesmo sem sinais claros de inflamação em exames, e o manejo costuma ser multidimensional",
+      "Sempre há febre alta diária e cultura positiva",
+      "É sempre causada por vírus específico e tem cura rápida",
+      "Só melhora com antibiótico de amplo espectro"
+    ],
+    answerIndex: 0,
+    explanation: "Fibromialgia pode ocorrer sem marcadores inflamatórios clássicos; o cuidado envolve sono, atividade física, suporte e acompanhamento."
+  },
+  {
+    id: "D2",
+    category: "laranja",
+    question: "Na leucemia, a redução de plaquetas pode estar associada a:",
+    options: [
+      "Maior facilidade para sangramentos e hematomas",
+      "Aumento de pelos e unhas mais fortes",
+      "Melhora imediata da imunidade",
+      "Aumento da visão noturna"
+    ],
+    answerIndex: 0,
+    explanation: "Plaquetas ajudam na coagulação; quando estão baixas, pode haver sangramentos e hematomas com mais facilidade."
   }
 ];
 
