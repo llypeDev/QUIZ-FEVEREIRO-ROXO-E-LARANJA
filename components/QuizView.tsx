@@ -3,6 +3,7 @@ import { GameState, Mode } from '../types';
 import { Button } from './Button';
 import { ArrowRight, RotateCcw, CheckCircle, XCircle, Info } from 'lucide-react';
 import { Modal } from './Modal';
+import confetti from 'canvas-confetti';
 
 interface QuizViewProps {
   state: GameState;
@@ -24,6 +25,25 @@ export const QuizView: React.FC<QuizViewProps> = ({
   const [showQuitModal, setShowQuitModal] = useState(false);
   const currentQ = state.questions[state.currentIndex];
   const progress = ((state.currentIndex) / totalQuestions) * 100;
+
+  // Unified selection handler to trigger animation
+  const handleSelection = (index: number) => {
+    if (state.isLocked) return;
+
+    // Trigger confetti if correct
+    if (index === currentQ.correctIndex) {
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.7 },
+        colors: ['#00a650', '#9333ea', '#ea580c'], // Brand Green, Purple, Orange
+        disableForReducedMotion: true,
+        zIndex: 1000,
+      });
+    }
+
+    onSelectOption(index);
+  };
   
   // Keyboard support
   useEffect(() => {
@@ -32,12 +52,12 @@ export const QuizView: React.FC<QuizViewProps> = ({
       const key = e.key.toLowerCase();
       const map: Record<string, number> = { a: 0, b: 1, c: 2, d: 3 };
       if (typeof map[key] === 'number' && map[key] < currentQ.options.length) {
-        onSelectOption(map[key]);
+        handleSelection(map[key]);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [state.isLocked, currentQ, onSelectOption, showQuitModal]);
+  }, [state.isLocked, currentQ, showQuitModal]); // Removed onSelectOption dependency to avoid potential stale closure if not memoized upstream, though effectively safe here.
 
   const ModeBadge = () => (
     <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gray-100 border border-gray-200 text-xs text-gray-600">
@@ -114,7 +134,7 @@ export const QuizView: React.FC<QuizViewProps> = ({
             return (
               <button
                 key={idx}
-                onClick={() => onSelectOption(idx)}
+                onClick={() => handleSelection(idx)}
                 disabled={state.isLocked}
                 className={`relative group w-full text-left p-4 md:p-5 rounded-2xl border-2 transition-all duration-200 flex items-center gap-4 shadow-sm ${btnClass} ${!state.isLocked && 'hover:-translate-y-0.5'}`}
               >
