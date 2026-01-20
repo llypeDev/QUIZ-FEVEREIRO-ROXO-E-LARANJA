@@ -52,7 +52,7 @@ function prepareGame(mode: Mode, count: number): PreparedQuestion[] {
 function App() {
   const [screen, setScreen] = useState<'home' | 'quiz' | 'result'>('home');
   const [mode, setMode] = useState<Mode>('misto');
-  const [count, setCount] = useState<number>(10);
+  const [count, setCount] = useState<number>(15);
   const [bestScores, setBestScores] = useState<BestScoresMap>({});
   const [userName, setUserName] = useState<string>('');
 
