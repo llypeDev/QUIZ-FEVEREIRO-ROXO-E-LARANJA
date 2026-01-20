@@ -3,7 +3,9 @@ import { GameState, Mode } from '../types';
 import { Button } from './Button';
 import { ArrowRight, RotateCcw, CheckCircle, XCircle, Info } from 'lucide-react';
 import { Modal } from './Modal';
-import confetti from 'canvas-confetti';
+
+// Declare global confetti function loaded from script tag
+declare const confetti: any;
 
 interface QuizViewProps {
   state: GameState;
@@ -32,14 +34,16 @@ export const QuizView: React.FC<QuizViewProps> = ({
 
     // Trigger confetti if correct
     if (index === currentQ.correctIndex) {
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: { y: 0.7 },
-        colors: ['#00a650', '#9333ea', '#ea580c'], // Brand Green, Purple, Orange
-        disableForReducedMotion: true,
-        zIndex: 1000,
-      });
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.7 },
+          colors: ['#00a650', '#9333ea', '#ea580c'], // Brand Green, Purple, Orange
+          disableForReducedMotion: true,
+          zIndex: 1000,
+        });
+      }
     }
 
     onSelectOption(index);
