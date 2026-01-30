@@ -26,8 +26,8 @@ export const ResultView: React.FC<ResultViewProps> = ({
   const [isSharing, setIsSharing] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
 
-  // Check promo eligibility
-  const isPromoEligible = mode === 'misto' && total === 15;
+  // Check promo eligibility (Mixed mode, 15 questions, AND >= 80% score)
+  const isPromoEligible = mode === 'misto' && total === 15 && pct >= 80;
 
   let message = "";
   if (pct >= 90) message = "Excelente! Você domina o assunto.";
@@ -138,7 +138,7 @@ export const ResultView: React.FC<ResultViewProps> = ({
            <div>
              <h4 className="font-bold text-orange-800 text-lg">Você está concorrendo!</h4>
              <p className="text-orange-700/80 text-sm">
-               Ao completar o desafio de 15 perguntas, você se qualificou para o sorteio. 
+               Ao completar o desafio de 15 perguntas com mais de 80% de acerto, você se qualificou para o sorteio. 
                <strong> Compartilhe a imagem acima</strong> para validar sua participação!
              </p>
            </div>
