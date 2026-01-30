@@ -85,8 +85,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             Teste seus conhecimentos
           </h2>
           <p className="text-muted text-sm leading-relaxed border-l-4 border-brand pl-4 py-1">
-            O objetivo é <strong>informar</strong> e <strong>estimular o cuidado</strong>. 
-            Se você ou alguém próximo tem sintomas persistentes, procure um serviço de saúde.
+            O objetivo é <strong>informar</strong> e <strong>estimular o cuidado</strong>, e, caso você ou alguém próximo apresente sintomas persistentes ou precise de ajuda, busque nossos canais de apoio: <a href="https://queroquero.mybeehome.com/wiki/107/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Unimed</a> e <a href="https://queroquero.mybeehome.com/wiki/113/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Conexa (Dr. Quero Estar Bem)</a>.
           </p>
         </div>
 
