@@ -63,7 +63,7 @@ export const ResultView: React.FC<ResultViewProps> = ({
             await navigator.share({
               files: [file],
               title: 'Meu Resultado no Quiz',
-              text: `Consegui ${state.score}/${total} pontos no Quiz Fevereiro Roxo e Laranja! 💚`
+              text: `Consegui ${state.score}/${total} pontos no Quiz Fevereiro Roxo e Laranja! 💚 #fevereiroroxoelaranja`
             });
           } catch (error) {
             // User cancelled or error, harmless
@@ -138,8 +138,7 @@ export const ResultView: React.FC<ResultViewProps> = ({
            <div>
              <h4 className="font-bold text-orange-800 text-lg">Você está concorrendo!</h4>
              <p className="text-orange-700/80 text-sm">
-               Ao completar o desafio de 15 perguntas com mais de 80% de acerto, você se qualificou para o sorteio. 
-               <strong> Compartilhe a imagem acima</strong> para validar sua participação!
+               Você atingiu a meta! Para concorrer ao sorteio, compartilhe a imagem acima no <strong>ComuniQ</strong> com a hashtag <strong>#fevereiroroxoelaranja</strong>.
              </p>
            </div>
          </div>
@@ -216,7 +215,7 @@ export const ResultView: React.FC<ResultViewProps> = ({
       <Modal
         isOpen={showShareModal}
         title="Imagem Salva!"
-        description="A imagem com seu resultado foi baixada para seu dispositivo. Compartilhe-a nas redes sociais para participar do sorteio!"
+        description="A imagem com seu resultado foi baixada para seu dispositivo. Compartilhe-a no ComuniQ com a hashtag #fevereiroroxoelaranja para participar do sorteio!"
         confirmText="Entendido"
         singleButton
         type="success"

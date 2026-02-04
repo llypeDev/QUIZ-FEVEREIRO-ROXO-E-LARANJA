@@ -166,7 +166,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <span className="bg-orange-100 text-[10px] px-1.5 py-0.5 rounded text-orange-600 uppercase">Novo</span>
               </h4>
               <p className="text-xs text-orange-700/90 leading-relaxed font-medium">
-                Responda as 15 perguntas com <strong>no mínimo 80% de acerto</strong> e <span className="underline decoration-orange-300 underline-offset-2">compartilhe seu resultado</span> para concorrer a um <strong>Kit Quero Estar-Bem</strong>!
+                Responda as 15 perguntas dos dois assuntos (Selecione tema Misto e 15 perguntas). Se você obter <strong>no mínimo 80% de acerto</strong> e compartilhar seu resultado no <strong>ComuniQ</strong> com a <strong>#fevereiroroxoelaranja</strong> estará concorrendo a um <strong>Kit do Quero Estar-Bem</strong>!
               </p>
             </div>
           </div>
