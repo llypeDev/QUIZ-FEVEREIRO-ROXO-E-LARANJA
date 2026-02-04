@@ -96,11 +96,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </p>
         </div>
 
-        {/* Form Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="space-y-3">
+        {/* Form Inputs Stacked */}
+        <div className="flex flex-col gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+          <div className="space-y-2">
             <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
-              Seu Nome
+              Seu Nome Completo
               {formError && !userName.trim() && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> *</span>}
             </label>
             <div className="relative">
@@ -108,8 +108,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 type="text"
                 value={userName}
                 onChange={handleNameChange}
-                placeholder="Ex: João Silva"
-                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-4 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userName.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
+                placeholder="Ex: Maria Oliveira"
+                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-3.5 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userName.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
               />
               <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${formError && !userName.trim() ? 'text-red-500' : 'text-muted'}`}>
                 <User size={20} />
@@ -117,7 +117,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             </div>
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-2">
             <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
               Matrícula
               {formError && !userMatricula.trim() && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> *</span>}
@@ -128,7 +128,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 value={userMatricula}
                 onChange={handleMatriculaChange}
                 placeholder="Ex: 123456"
-                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-4 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userMatricula.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
+                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-3.5 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userMatricula.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
               />
               <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${formError && !userMatricula.trim() ? 'text-red-500' : 'text-muted'}`}>
                 <Hash size={20} />

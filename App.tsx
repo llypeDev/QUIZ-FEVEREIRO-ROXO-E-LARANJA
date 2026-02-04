@@ -67,6 +67,7 @@ function App() {
   });
 
   useEffect(() => {
+    console.log("VERSÃO ATUALIZADA: COM MATRÍCULA");
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
