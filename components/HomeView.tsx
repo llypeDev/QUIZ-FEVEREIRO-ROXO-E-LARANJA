@@ -38,7 +38,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
   const handleStartClick = () => {
     if (!userName.trim() || !userMatricula.trim()) {
       setFormError(true);
-      // Shake animation or focus could be added here
       return;
     }
     onStart();

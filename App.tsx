@@ -98,15 +98,21 @@ function App() {
 
   const saveToSupabase = async (finalScore: number) => {
     try {
-      await supabase.from('quiz_results').insert({
+      const { error } = await supabase.from('quiz_results').insert({
         name: userName,
         matricula: userMatricula,
         score: finalScore,
         total_questions: gameState.questions.length,
         mode: mode,
       });
+      
+      if (error) {
+          console.error("Erro Supabase:", error);
+      } else {
+          console.log("Salvo no Supabase com sucesso!");
+      }
     } catch (error) {
-      console.error("Erro ao salvar no Supabase:", error);
+      console.error("Erro inesperado ao salvar no Supabase:", error);
     }
   };
 
