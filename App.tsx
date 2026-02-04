@@ -23,19 +23,16 @@ function shuffleArray<T>(array: T[]): T[] {
   return newArr;
 }
 
-// Helper: Prepare Questions for a session (shuffle options)
+// Helper: Prepare Questions for a session
 function prepareGame(mode: Mode, count: number): PreparedQuestion[] {
   let pool = QUESTION_BANK;
   if (mode === 'roxo') pool = pool.filter(q => q.category === 'roxo');
   if (mode === 'laranja') pool = pool.filter(q => q.category === 'laranja');
   
-  // Shuffle questions
   const selectedRaw = shuffleArray(pool).slice(0, Math.max(1, Math.min(count, pool.length)));
   
   return selectedRaw.map(q => {
-    // Create paired options with original index
     const paired = q.options.map((text, idx) => ({ text, originalIdx: idx }));
-    // Shuffle options
     const shuffledOpts = shuffleArray(paired);
     
     return {
@@ -55,10 +52,11 @@ function App() {
   const [mode, setMode] = useState<Mode>('misto');
   const [count, setCount] = useState<number>(15);
   const [bestScores, setBestScores] = useState<BestScoresMap>({});
+  
+  // User Data State
   const [userName, setUserName] = useState<string>('');
   const [userMatricula, setUserMatricula] = useState<string>('');
 
-  // Game State
   const [gameState, setGameState] = useState<GameState>({
     questions: [],
     currentIndex: 0,
@@ -68,7 +66,6 @@ function App() {
     selectedOption: null
   });
 
-  // Load scores on mount
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -80,7 +77,6 @@ function App() {
     }
   }, []);
 
-  // Save scores
   const saveScore = (newScore: number, total: number) => {
     const key = `${mode}:${count}`;
     const pct = Math.round((newScore / total) * 100);
@@ -107,12 +103,12 @@ function App() {
       });
       
       if (error) {
-          console.error("Erro Supabase:", error);
+          console.error("Supabase Error:", error.message);
       } else {
-          console.log("Salvo no Supabase com sucesso!");
+          console.log("Score saved to Supabase successfully.");
       }
     } catch (error) {
-      console.error("Erro inesperado ao salvar no Supabase:", error);
+      console.error("Unexpected error saving to Supabase:", error);
     }
   };
 
@@ -160,7 +156,7 @@ function App() {
     
     if (isLast) {
       saveScore(gameState.score, gameState.questions.length);
-      saveToSupabase(gameState.score); // Fire and forget
+      saveToSupabase(gameState.score); 
       setScreen('result');
     } else {
       setGameState(prev => ({
@@ -181,7 +177,6 @@ function App() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-background font-sans">
       <div className="w-full max-w-4xl relative z-10">
-        {/* Top Bar */}
         <div className="flex flex-col items-center justify-center mb-8 gap-2 text-center">
           <div>
             <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">
@@ -194,7 +189,6 @@ function App() {
           </div>
         </div>
 
-        {/* Main Card */}
         <div className="bg-card card-shadow rounded-3xl overflow-hidden p-5 sm:p-8 md:p-10 transition-all duration-500">
           {screen === 'home' && (
             <HomeView 
