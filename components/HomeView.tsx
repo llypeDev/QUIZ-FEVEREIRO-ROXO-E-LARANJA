@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Mode, BestScoresMap } from '../types';
 import { Button } from './Button';
-import { Play, Trophy, User, Gift, AlertCircle } from 'lucide-react';
+import { Play, Trophy, User, Gift, AlertCircle, Hash } from 'lucide-react';
 
 interface HomeViewProps {
   mode: Mode;
@@ -11,6 +11,8 @@ interface HomeViewProps {
   bestScores: BestScoresMap;
   userName: string;
   setUserName: (n: string) => void;
+  userMatricula: string;
+  setUserMatricula: (m: string) => void;
   onStart: () => void;
 }
 
@@ -22,9 +24,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
   bestScores,
   userName,
   setUserName,
+  userMatricula,
+  setUserMatricula,
   onStart,
 }) => {
-  const [nameError, setNameError] = useState(false);
+  const [formError, setFormError] = useState(false);
   
   const getBestScore = (m: Mode, c: number) => {
     const key = `${m}:${c}`;
@@ -32,9 +36,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
   };
 
   const handleStartClick = () => {
-    if (!userName.trim()) {
-      setNameError(true);
-      // Shake animation or focus could be added here
+    if (!userName.trim() || !userMatricula.trim()) {
+      setFormError(true);
       return;
     }
     onStart();
@@ -42,8 +45,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
-    if (nameError && e.target.value.trim()) {
-      setNameError(false);
+    if (formError && e.target.value.trim() && userMatricula.trim()) {
+      setFormError(false);
+    }
+  };
+
+  const handleMatriculaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserMatricula(e.target.value);
+    if (formError && userName.trim() && e.target.value.trim()) {
+      setFormError(false);
     }
   };
 
@@ -89,22 +99,44 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </p>
         </div>
 
-        {/* Name Input */}
-        <div className="space-y-3">
-          <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
-            Seu Nome
-            {nameError && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> Obrigatório</span>}
-          </label>
-          <div className="relative">
-            <input 
-              type="text"
-              value={userName}
-              onChange={handleNameChange}
-              placeholder="Digite seu nome..."
-              className={`w-full bg-white border text-text rounded-xl pl-12 pr-4 py-4 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${nameError ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
-            />
-            <div className={`absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${nameError ? 'text-red-500' : 'text-muted'}`}>
-              <User size={20} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {/* Name Input */}
+          <div className="space-y-3">
+            <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
+              Seu Nome
+              {formError && !userName.trim() && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> *</span>}
+            </label>
+            <div className="relative">
+              <input 
+                type="text"
+                value={userName}
+                onChange={handleNameChange}
+                placeholder="Ex: João Silva"
+                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-4 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userName.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
+              />
+              <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${formError && !userName.trim() ? 'text-red-500' : 'text-muted'}`}>
+                <User size={20} />
+              </div>
+            </div>
+          </div>
+
+          {/* Matricula Input */}
+          <div className="space-y-3">
+            <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
+              Matrícula
+              {formError && !userMatricula.trim() && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> *</span>}
+            </label>
+            <div className="relative">
+              <input 
+                type="text"
+                value={userMatricula}
+                onChange={handleMatriculaChange}
+                placeholder="Ex: 123456"
+                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-4 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userMatricula.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
+              />
+              <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${formError && !userMatricula.trim() ? 'text-red-500' : 'text-muted'}`}>
+                <Hash size={20} />
+              </div>
             </div>
           </div>
         </div>

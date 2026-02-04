@@ -11,6 +11,7 @@ import { QUESTION_BANK, STORAGE_KEY } from './constants';
 import { HomeView } from './components/HomeView';
 import { QuizView } from './components/QuizView';
 import { ResultView } from './components/ResultView';
+import { supabase } from './supabaseClient';
 
 // Helper: Shuffle Array
 function shuffleArray<T>(array: T[]): T[] {
@@ -55,6 +56,7 @@ function App() {
   const [count, setCount] = useState<number>(15);
   const [bestScores, setBestScores] = useState<BestScoresMap>({});
   const [userName, setUserName] = useState<string>('');
+  const [userMatricula, setUserMatricula] = useState<string>('');
 
   // Game State
   const [gameState, setGameState] = useState<GameState>({
@@ -94,9 +96,23 @@ function App() {
     }
   };
 
+  const saveToSupabase = async (finalScore: number) => {
+    try {
+      await supabase.from('quiz_results').insert({
+        name: userName,
+        matricula: userMatricula,
+        score: finalScore,
+        total_questions: gameState.questions.length,
+        mode: mode,
+      });
+    } catch (error) {
+      console.error("Erro ao salvar no Supabase:", error);
+    }
+  };
+
   const handleStart = () => {
-    if (!userName.trim()) {
-      alert("Por favor, digite seu nome para começar.");
+    if (!userName.trim() || !userMatricula.trim()) {
+      alert("Por favor, preencha nome e matrícula.");
       return;
     }
     const questions = prepareGame(mode, count);
@@ -138,6 +154,7 @@ function App() {
     
     if (isLast) {
       saveScore(gameState.score, gameState.questions.length);
+      saveToSupabase(gameState.score); // Fire and forget
       setScreen('result');
     } else {
       setGameState(prev => ({
@@ -182,6 +199,8 @@ function App() {
               bestScores={bestScores} 
               userName={userName}
               setUserName={setUserName}
+              userMatricula={userMatricula}
+              setUserMatricula={setUserMatricula}
               onStart={handleStart} 
             />
           )}
