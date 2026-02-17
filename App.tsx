@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Mode, 
-  QuestionData, 
   PreparedQuestion, 
   GameState, 
   BestScoresMap,
@@ -11,6 +10,7 @@ import { QUESTION_BANK, STORAGE_KEY } from './constants';
 import { HomeView } from './components/HomeView';
 import { QuizView } from './components/QuizView';
 import { ResultView } from './components/ResultView';
+import { Modal } from './components/Modal';
 import { supabase } from './supabaseClient';
 
 // Helper: Shuffle Array
@@ -67,7 +67,6 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("VERSÃO ATUALIZADA: COM MATRÍCULA E AUTH FIX");
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -94,15 +93,16 @@ function App() {
   };
 
   const saveToSupabase = async (finalScore: number) => {
+    // If Supabase is not configured or RLS blocks it, we just fail silently
+    // to preserve the user experience. The local score is already saved above.
     try {
-      // 1. Check/Establish Session (Anonymous Auth) to satisfy "Authenticated" RLS policies
+      // 1. Check/Establish Session (Anonymous Auth)
       const { data: { session } } = await supabase.auth.getSession();
       
       if (!session) {
-        // Attempt anonymous sign-in if no session exists
         const { error: authError } = await supabase.auth.signInAnonymously();
         if (authError) {
-          console.warn("Supabase Auth (Anon) failed. Insert might fail if RLS requires auth.", authError.message);
+          console.warn("Supabase Auth (Anon) skipped:", authError.message);
         }
       }
 
@@ -116,13 +116,14 @@ function App() {
       });
       
       if (error) {
-          // Log as warning instead of error so it doesn't look like a crash to the user
-          console.warn("Supabase Save Failed (RLS Policy or Network):", error.message);
+          // Log error for developer, but do not show UI error
+          console.warn("Supabase Save Warning (RLS or Network):", error.message);
+          console.info("To fix RLS: Run 'create policy \"Enable insert\" on quiz_results for insert with check (true);' in Supabase SQL Editor.");
       } else {
           console.log("Score saved to Supabase successfully.");
       }
-    } catch (error) {
-      console.warn("Unexpected error saving to Supabase:", error);
+    } catch (error: any) {
+      console.warn("Supabase integration skipped due to error:", error);
     }
   };
 
