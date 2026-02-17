@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Mode, BestScoresMap } from '../types';
 import { Button } from './Button';
-import { Play, Trophy, User, Gift, AlertCircle } from 'lucide-react';
+import { Play, Trophy, User, Gift, AlertCircle, Hash } from 'lucide-react';
 
 interface HomeViewProps {
   mode: Mode;
@@ -11,6 +11,8 @@ interface HomeViewProps {
   bestScores: BestScoresMap;
   userName: string;
   setUserName: (n: string) => void;
+  userMatricula: string;
+  setUserMatricula: (m: string) => void;
   onStart: () => void;
 }
 
@@ -22,9 +24,11 @@ export const HomeView: React.FC<HomeViewProps> = ({
   bestScores,
   userName,
   setUserName,
+  userMatricula,
+  setUserMatricula,
   onStart,
 }) => {
-  const [nameError, setNameError] = useState(false);
+  const [formError, setFormError] = useState(false);
   
   const getBestScore = (m: Mode, c: number) => {
     const key = `${m}:${c}`;
@@ -32,9 +36,8 @@ export const HomeView: React.FC<HomeViewProps> = ({
   };
 
   const handleStartClick = () => {
-    if (!userName.trim()) {
-      setNameError(true);
-      // Shake animation or focus could be added here
+    if (!userName.trim() || !userMatricula.trim()) {
+      setFormError(true);
       return;
     }
     onStart();
@@ -42,8 +45,15 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserName(e.target.value);
-    if (nameError && e.target.value.trim()) {
-      setNameError(false);
+    if (formError && e.target.value.trim() && userMatricula.trim()) {
+      setFormError(false);
+    }
+  };
+
+  const handleMatriculaChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setUserMatricula(e.target.value);
+    if (formError && userName.trim() && e.target.value.trim()) {
+      setFormError(false);
     }
   };
 
@@ -52,8 +62,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
   const renderBestScoreRow = (m: Mode) => {
     const score = getBestScore(m, count);
     const label = m === 'roxo' ? 'Fev. Roxo' : m === 'laranja' ? 'Fev. Laranja' : 'Misto';
-    
-    // Semantic colors for the dots
     const dotClass = m === 'roxo' ? 'bg-roxo' : m === 'laranja' ? 'bg-laranja' : 'bg-gray-400';
     
     return (
@@ -78,34 +86,53 @@ export const HomeView: React.FC<HomeViewProps> = ({
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in">
-      {/* Settings Column */}
       <div className="space-y-8">
         <div>
           <h2 className="text-3xl font-bold mb-3 text-text tracking-tight">
             Teste seus conhecimentos
           </h2>
           <p className="text-muted text-sm leading-relaxed border-l-4 border-brand pl-4 py-1">
-            O objetivo é <strong>informar</strong> e <strong>estimular o cuidado</strong>. 
-            Se você ou alguém próximo tem sintomas persistentes, procure um serviço de saúde.
+            O objetivo é <strong>informar</strong> e <strong>estimular o cuidado</strong>. Caso você ou alguém próximo apresente sintomas persistentes, busque apoio: <a href="https://queroquero.mybeehome.com/wiki/107/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Unimed</a> e <a href="https://queroquero.mybeehome.com/wiki/113/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Conexa (Dr. Quero Estar Bem)</a>.
           </p>
         </div>
 
-        {/* Name Input */}
-        <div className="space-y-3">
-          <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
-            Seu Nome
-            {nameError && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> Obrigatório</span>}
-          </label>
-          <div className="relative">
-            <input 
-              type="text"
-              value={userName}
-              onChange={handleNameChange}
-              placeholder="Digite seu nome..."
-              className={`w-full bg-white border text-text rounded-xl pl-12 pr-4 py-4 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${nameError ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
-            />
-            <div className={`absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${nameError ? 'text-red-500' : 'text-muted'}`}>
-              <User size={20} />
+        {/* Form Inputs Stacked */}
+        <div className="flex flex-col gap-4 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+          <div className="space-y-2">
+            <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
+              Seu Nome Completo
+              {formError && !userName.trim() && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> *</span>}
+            </label>
+            <div className="relative">
+              <input 
+                type="text"
+                value={userName}
+                onChange={handleNameChange}
+                placeholder="Ex: Maria Oliveira"
+                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-3.5 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userName.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
+              />
+              <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${formError && !userName.trim() ? 'text-red-500' : 'text-muted'}`}>
+                <User size={20} />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-xs uppercase tracking-wider text-muted font-bold flex justify-between">
+              Matrícula
+              {formError && !userMatricula.trim() && <span className="text-red-500 flex items-center gap-1"><AlertCircle size={12}/> *</span>}
+            </label>
+            <div className="relative">
+              <input 
+                type="text"
+                value={userMatricula}
+                onChange={handleMatriculaChange}
+                placeholder="Ex: 123456"
+                className={`w-full bg-white border text-text rounded-xl pl-10 pr-4 py-3.5 outline-none focus:ring-1 font-medium shadow-sm transition-colors ${formError && !userMatricula.trim() ? 'border-red-500 focus:border-red-500 focus:ring-red-500' : 'border-gray-200 focus:border-brand focus:ring-brand hover:border-gray-300'}`}
+              />
+              <div className={`absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none transition-colors ${formError && !userMatricula.trim() ? 'text-red-500' : 'text-muted'}`}>
+                <Hash size={20} />
+              </div>
             </div>
           </div>
         </div>
@@ -154,7 +181,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
           </div>
         </div>
 
-        {/* Promo Banner */}
         {isPromoEligible && (
           <div className="bg-gradient-to-r from-orange-50 to-yellow-50 border border-orange-200/60 rounded-xl p-4 flex gap-4 items-start animate-fade-in shadow-sm relative overflow-hidden group">
             <div className="absolute -right-4 -top-4 bg-orange-100 w-16 h-16 rounded-full blur-2xl opacity-50"></div>
@@ -167,7 +193,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 <span className="bg-orange-100 text-[10px] px-1.5 py-0.5 rounded text-orange-600 uppercase">Novo</span>
               </h4>
               <p className="text-xs text-orange-700/90 leading-relaxed font-medium">
-                Responda as 15 perguntas e <span className="underline decoration-orange-300 underline-offset-2">compartilhe seu resultado</span> para concorrer a um <strong>Kit Quero Estar-Bem</strong>!
+                Responda as 15 perguntas dos dois assuntos (Misto, 15 perguntas), acerte min. 80% e compartilhe no ComuniQ com <strong>#fevereiroroxoelaranja</strong>.
               </p>
             </div>
           </div>
@@ -185,7 +211,6 @@ export const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </div>
 
-      {/* Info / Scores Column */}
       <div className="space-y-6">
         <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
           <h3 className="text-xs uppercase tracking-wider text-muted mb-4 font-bold flex items-center gap-2">
@@ -208,14 +233,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
              <div className="w-1 bg-roxo rounded-full shrink-0 h-auto" />
              <p className="text-gray-600 leading-relaxed">
                <strong className="text-roxo block mb-1">Fevereiro Roxo</strong>
-               Informação, acolhimento e continuidade do tratamento de doenças crônicas como Lúpus e Alzheimer.
+               Lúpus, Fibromialgia, Alzheimer.
              </p>
           </div>
           <div className="flex gap-4">
              <div className="w-1 bg-laranja rounded-full shrink-0 h-auto" />
              <p className="text-gray-600 leading-relaxed">
                <strong className="text-laranja block mb-1">Fevereiro Laranja</strong>
-               Atenção a sinais persistentes e incentivo responsável à doação de medula óssea para tratar Leucemia.
+               Leucemia e doação de medula.
              </p>
           </div>
         </div>
