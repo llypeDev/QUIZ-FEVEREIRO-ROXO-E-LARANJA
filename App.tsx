@@ -67,7 +67,7 @@ function App() {
   });
 
   useEffect(() => {
-    console.log("VERSÃO ATUALIZADA: COM MATRÍCULA");
+    console.log("VERSÃO ATUALIZADA: COM MATRÍCULA E AUTH FIX");
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -95,6 +95,18 @@ function App() {
 
   const saveToSupabase = async (finalScore: number) => {
     try {
+      // 1. Check/Establish Session (Anonymous Auth) to satisfy "Authenticated" RLS policies
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session) {
+        // Attempt anonymous sign-in if no session exists
+        const { error: authError } = await supabase.auth.signInAnonymously();
+        if (authError) {
+          console.warn("Supabase Auth (Anon) failed. Insert might fail if RLS requires auth.", authError.message);
+        }
+      }
+
+      // 2. Perform Insert
       const { error } = await supabase.from('quiz_results').insert({
         name: userName,
         matricula: userMatricula,
@@ -104,12 +116,13 @@ function App() {
       });
       
       if (error) {
-          console.error("Supabase Error:", error.message);
+          // Log as warning instead of error so it doesn't look like a crash to the user
+          console.warn("Supabase Save Failed (RLS Policy or Network):", error.message);
       } else {
           console.log("Score saved to Supabase successfully.");
       }
     } catch (error) {
-      console.error("Unexpected error saving to Supabase:", error);
+      console.warn("Unexpected error saving to Supabase:", error);
     }
   };
 
