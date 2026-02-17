@@ -138,7 +138,7 @@ export const ResultView: React.FC<ResultViewProps> = ({
            <div>
              <h4 className="font-bold text-orange-800 text-lg">Você está concorrendo!</h4>
              <p className="text-orange-700/80 text-sm">
-               Você atingiu a meta! Para concorrer ao sorteio, compartilhe a imagem acima no <strong>ComuniQ</strong> com a hashtag <strong>#fevereiroroxoelaranja</strong>.
+               Você atingiu a meta de 80% de acertos. Para concorrer ao sorteio, compartilhe seu resultado nos comentários do <a href="https://queroquero.mybeehome.com/" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">post da campanha no ComuniQ</a> com a hashtag <strong>#fevereiroroxoelaranja</strong>.
              </p>
            </div>
          </div>

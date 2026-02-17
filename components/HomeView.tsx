@@ -92,7 +92,7 @@ export const HomeView: React.FC<HomeViewProps> = ({
             Teste seus conhecimentos
           </h2>
           <p className="text-muted text-sm leading-relaxed border-l-4 border-brand pl-4 py-1">
-            O objetivo é <strong>informar</strong> e <strong>estimular o cuidado</strong>. Caso você ou alguém próximo apresente sintomas persistentes, busque apoio: <a href="https://queroquero.mybeehome.com/wiki/107/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Unimed</a> e <a href="https://queroquero.mybeehome.com/wiki/113/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Conexa (Dr. Quero Estar Bem)</a>.
+            O objetivo desta ação é conscientizar e incentivar o cuidado com a saúde. Caso você ou alguém próximo apresente sintomas ou precise de apoio, procure orientação médica. Lembre-se que contamos com os benefícios de saúde <a href="https://queroquero.mybeehome.com/wiki/107/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Unimed</a> e <a href="https://queroquero.mybeehome.com/wiki/113/detail" target="_blank" rel="noopener noreferrer" className="font-bold text-brand hover:underline">Dr. Quero Estar Bem (App Conexa)</a> para apoiar você nesse cuidado.
           </p>
         </div>
 
@@ -192,9 +192,14 @@ export const HomeView: React.FC<HomeViewProps> = ({
                 Sorteio Especial
                 <span className="bg-orange-100 text-[10px] px-1.5 py-0.5 rounded text-orange-600 uppercase">Novo</span>
               </h4>
-              <p className="text-xs text-orange-700/90 leading-relaxed font-medium">
-                Responda as 15 perguntas dos dois assuntos (Misto, 15 perguntas), acerte min. 80% e compartilhe no ComuniQ com <strong>#fevereiroroxoelaranja</strong>.
-              </p>
+              <div className="text-xs text-orange-700/90 leading-relaxed font-medium space-y-2">
+                <p>
+                  Responda às 15 perguntas dos dois assuntos (selecione o tema Misto e 15 perguntas).
+                </p>
+                <p>
+                  Se você obter no mínimo 80% de acertos e compartilhar seu resultado até 28/02, nos comentários do <a href="https://queroquero.mybeehome.com/" target="_blank" rel="noopener noreferrer" className="font-bold hover:underline">post da campanha no ComuniQ</a>, utilizando a hashtag <strong>#fevereiroroxoelaranja</strong>, você estará concorrendo a um Kit Quero Estar Bem, que será sorteado em março.
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -227,20 +232,20 @@ export const HomeView: React.FC<HomeViewProps> = ({
         <div className="p-6 rounded-2xl bg-brand-subtle border border-brand/10 text-sm space-y-4">
           <h3 className="font-bold text-brand-dark flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
-            Dicas Rápidas
+            Dicas Rápidas para o Quiz
           </h3>
           <div className="flex gap-4">
              <div className="w-1 bg-roxo rounded-full shrink-0 h-auto" />
              <p className="text-gray-600 leading-relaxed">
                <strong className="text-roxo block mb-1">Fevereiro Roxo</strong>
-               Lúpus, Fibromialgia, Alzheimer.
+               Informação e acolhimento sobre três doenças crônicas que não têm cura, mas possuem tratamento: Lúpus, Alzheimer e Fibromialgia.
              </p>
           </div>
           <div className="flex gap-4">
              <div className="w-1 bg-laranja rounded-full shrink-0 h-auto" />
              <p className="text-gray-600 leading-relaxed">
                <strong className="text-laranja block mb-1">Fevereiro Laranja</strong>
-               Leucemia e doação de medula.
+               Conscientização sobre a Leucemia e incentivo à doação de medula óssea.
              </p>
           </div>
         </div>
